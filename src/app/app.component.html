@@ -1,17 +1,30 @@
+<div class="maindiv">
+  <mat-toolbar color="primary" class="navbar">
+    <button mat-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a routerLink="/"><h1>PayPay</h1></a>
+  </mat-toolbar>
+  <div fxLayout="row" fxLayoutAlign="start" #wrapper>
+    <mat-sidenav-container fullscreen [ngClass]="{'authorized-view': 'true' }">
+      <mat-sidenav #sidenav [mode]="isLargeScreen() ? 'side' : 'over'"
+                   [opened]="isLargeScreen()" class="sidenav">
+        <ng-scrollbar>
+          <app-main-menu></app-main-menu>
+        </ng-scrollbar>
+      </mat-sidenav>
+      <router-outlet></router-outlet>
+      <ng-scrollbar>
+        <div class="site">
+          <div class="content">
+            <router-outlet></router-outlet>
+            <simple-notifications></simple-notifications>
+          </div>
+        </div>
+      </ng-scrollbar>
 
-<mat-toolbar color="primary">
-  <mat-toolbar-row fxFlex="100">
-
-    <h1>PayPay</h1>
-    <span fxFlex="2"></span>
-    <span style="font-size: 11px;">Click on the route to visit page</span>
-    <span fxFlex="2"></span>
-    <div>
-      <a mat-button [routerLink]="'admin-view'" [routerLinkActive]="'active'"> Admin </a>
-      <a mat-button [routerLink]="'employee-view'"> Employee </a>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-<router-outlet></router-outlet>
+    </mat-sidenav-container>
+  </div>
+</div>
 
 
