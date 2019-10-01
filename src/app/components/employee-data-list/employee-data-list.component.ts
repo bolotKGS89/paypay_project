@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {EmployeeDataDialogComponent} from '../../dialogs/employee-data-dialog/employee-data-dialog.component';
-import {EmployeeService} from '../../services/http.service';
+import {HttpService} from '../../services/http.service';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 
@@ -21,29 +21,30 @@ export class EmployeeDataListComponent implements OnInit, OnDestroy {
 
   constructor(private toastrService: ToastrService,
               private dialog: MatDialog,
-              public employeeService: EmployeeService
+              public httpService: HttpService
             ) { }
 
   ngOnInit() {
-    this.employeeSubscription = this.employeeService.getEmployees().subscribe((data) => {
+    this.employeeSubscription = this.httpService.getEmployees().subscribe((data) => {
       this.dataSource = data;
     });
   }
 
   public deleteData(id: number) {
-    this.employeeSubscription = this.employeeService.deleteEmployee(id).subscribe((data) => {
+    this.employeeSubscription = this.httpService.deleteEmployee(id).subscribe((data) => {
       this.toastrService.success(`Employee ${data} successfully removed`);
     }, (error) => {
       this.toastrService.error(`Error: ${error}`);
     });
   }
 
-  public openDialog(buttonArg: string): void {
+  public openDialog(buttonArg: string, id: number = null): void {
     const openDialog = this.dialog.open(EmployeeDataDialogComponent, {
       height: '50vh',
       width: '30vw',
       data: {
-        button: buttonArg
+        button: buttonArg,
+        id: id
       }
     });
 

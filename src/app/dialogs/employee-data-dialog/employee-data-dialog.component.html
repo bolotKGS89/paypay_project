@@ -3,14 +3,14 @@
 <div mat-dialog-content>
   <form class="modal-data-form" [formGroup]="employeeDialogForm">
       <mat-form-field class="modal-input">
-        <input matInput placeholder="Enter employee name:" formControlName="employeeName">
-        <mat-error *ngIf="this.employeeDialogForm['controls'].employeeName.invalid && (this.employeeDialogForm['controls'].employeeName.dirty
-                || this.employeeDialogForm['controls'].employeeName.touched)">*Required</mat-error>
+        <input matInput placeholder="Enter employee name:" formControlName="name">
+        <mat-error *ngIf="this.employeeDialogForm['controls'].name.invalid && (this.employeeDialogForm['controls'].name.dirty
+                || this.employeeDialogForm['controls'].name.touched)">*Required</mat-error>
       </mat-form-field>
     <mat-form-field class="modal-input">
-      <input matInput placeholder="Enter job position:" formControlName="jobPosition">
-      <mat-error *ngIf="this.employeeDialogForm['controls'].jobPosition.invalid && (this.employeeDialogForm['controls'].jobPosition.dirty
-                || this.employeeDialogForm['controls'].jobPosition.touched)">*Required</mat-error>
+      <input matInput placeholder="Enter job position:" formControlName="position">
+      <mat-error *ngIf="this.employeeDialogForm['controls'].position.invalid && (this.employeeDialogForm['controls'].position.dirty
+                || this.employeeDialogForm['controls'].position.touched)">*Required</mat-error>
     </mat-form-field>
     <mat-form-field class="modal-input">
       <input matInput placeholder="Enter experience:" formControlName="experience">
@@ -18,7 +18,7 @@
                 || this.employeeDialogForm['controls'].experience.touched)">*Required or must be numeric</mat-error>
     </mat-form-field>
     <mat-form-field class="modal-input">
-      <input matInput placeholder="Enter experience:" formControlName="nationality">
+      <input matInput placeholder="Enter nationality:" formControlName="nationality">
       <mat-error *ngIf="this.employeeDialogForm['controls'].nationality.invalid && (this.employeeDialogForm['controls'].nationality.dirty
                 || this.employeeDialogForm['controls'].nationality.touched)">*Required</mat-error>
     </mat-form-field>
@@ -27,5 +27,5 @@
 <div mat-dialog-actions>
   <span class="filler"></span>
   <button mat-raised-button color="accent" matDialogClose>Cancel</button>
-  <button mat-raised-button color="primary">{{buttonName}}</button>
+  <button mat-raised-button color="primary" (click)="sendData()">{{buttonName}}</button>
 </div>
