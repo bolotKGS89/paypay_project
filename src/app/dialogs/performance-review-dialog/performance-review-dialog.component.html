@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Performance form</h2>
+<br>
+<div mat-dialog-content>
+  <form class="modal-data-form" [formGroup]="performanceDialogForm">
+    <mat-form-field class="modal-input">
+      <input matInput placeholder="Enter employee name:" formControlName="grade">
+      <mat-error *ngIf="this.performanceDialogForm['controls'].grade.invalid && (this.performanceDialogForm['controls'].grade.dirty
+                || this.performanceDialogForm['controls'].grade.touched)">*Required or must be numeric</mat-error>
+    </mat-form-field>
+    <mat-form-field class="modal-input">
+      <input matInput placeholder="Enter job position:" formControlName="date">
+      <mat-error *ngIf="this.performanceDialogForm['controls'].date.invalid && (this.performanceDialogForm['controls'].date.dirty
+                || this.performanceDialogForm['controls'].date.touched)">*Required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="modal-input">
+      <input matInput placeholder="Enter experience:" formControlName="comment">
+      <mat-error *ngIf="this.performanceDialogForm['controls'].comment.invalid && (this.performanceDialogForm['controls'].comment.dirty
+                || this.performanceDialogForm['controls'].comment.touched)">*Required</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <span class="filler"></span>
+  <button mat-raised-button color="accent" matDialogClose>Cancel</button>
+  <button mat-raised-button color="primary">{{buttonName}}</button>
+</div>

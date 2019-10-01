@@ -1,0 +1,31 @@
+.maindiv {
+  min-height: 100vh;
+}
+
+.authorized-view{
+  top: 3.5em !important;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+mat-sidenav {
+  width: 240px;
+  box-shadow: 3px 0 6px rgba(0,0,0,.24);
+}
+
+.site{
+  display: flex;
+  flex-direction: column;
+  min-height: 94.2vh;
+}
+
+.content{
+  flex: 1;
+}
+
+.filler {
+  flex: 1 1 auto;
+}
