@@ -14,7 +14,6 @@ export class FeedbackDialogComponent implements OnInit {
   public commentArray: string[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any,
-              public dialogRef: MatDialogRef<FeedbackDialogComponent>,
               private formBuilder: FormBuilder) {
     }
 
