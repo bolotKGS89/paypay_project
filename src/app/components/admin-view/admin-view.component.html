@@ -1,1 +1,22 @@
-<p>admin-view works!</p>
+<div style="padding: 0.5em;" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutWrap>
+  <mat-card fxFlex="100">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <p class="tab-title">Employees</p>
+        </ng-template>
+        <ng-template matTabContent>
+          <app-employee-data-list></app-employee-data-list>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <p class="tab-title">Performance</p>
+        </ng-template>
+        <ng-template matTabContent>
+          <app-performance-review-list></app-performance-review-list>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
