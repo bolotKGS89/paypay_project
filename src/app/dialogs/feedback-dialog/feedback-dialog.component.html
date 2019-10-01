@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Employee data form</h2>
+<br>
+<div mat-dialog-content>
+  <form class="modal-data-form" [formGroup]="feedbackDialogForm">
+    <mat-form-field class="modal-input">
+      <input matInput placeholder="Enter employee name:" formControlName="employeeName">
+      <mat-error *ngIf="this.feedbackDialogForm['controls'].employeeName.invalid && (this.feedbackDialogForm['controls'].employeeName.dirty
+                || this.feedbackDialogForm['controls'].employeeName.touched)">*Required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="modal-input">
+      <mat-label>Enter comment:</mat-label>
+      <mat-select formControlName="comment">
+        <mat-option *ngFor="let comment of commentArray">
+          {{comment}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="modal-input">
+      <textarea matInput placeholder="Enter feedback:" formControlName="feedback"></textarea>
+      <mat-error *ngIf="this.feedbackDialogForm['controls'].feedback.invalid && (this.feedbackDialogForm['controls'].feedback.dirty
+                || this.feedbackDialogForm['controls'].feedback.touched)">*Required</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <span class="filler"></span>
+  <button mat-raised-button color="accent" matDialogClose>Cancel</button>
+  <button mat-raised-button color="primary">{{buttonName}}</button>
+</div>

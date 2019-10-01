@@ -18,7 +18,6 @@ export class EmployeeDataListComponent implements OnInit {
     {name: 'Thomas Wurz', position: 'Product owner', experience: 6, nationality: 'DE'}
   ];
 
-  private button: string;
 
   public displayedColumns: string[];
   public dataSource;

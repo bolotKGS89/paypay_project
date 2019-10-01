@@ -26,7 +26,9 @@ import { EmployeeDataDialogComponent } from './dialogs/employee-data-dialog/empl
 import { PerformanceReviewDialogComponent } from './dialogs/performance-review-dialog/performance-review-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatFormFieldModule, MatInputModule, MatOptionModule} from '@angular/material';
+import { FeedbackDialogComponent } from './dialogs/feedback-dialog/feedback-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -39,6 +41,7 @@ import {MatFormFieldModule, MatInputModule} from '@angular/material';
     PerformanceReviewListComponent,
     EmployeeDataDialogComponent,
     PerformanceReviewDialogComponent,
+    FeedbackDialogComponent,
 
   ],
   imports: [
@@ -62,12 +65,15 @@ import {MatFormFieldModule, MatInputModule} from '@angular/material';
     MatDialogModule,
     SimpleNotificationsModule.forRoot(),
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [],
   entryComponents: [
     EmployeeDataDialogComponent,
-    PerformanceReviewDialogComponent
+    PerformanceReviewDialogComponent,
+    FeedbackDialogComponent
   ],
   bootstrap: [AppComponent]
 })
