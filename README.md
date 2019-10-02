@@ -10,6 +10,7 @@ In order to launch an application, follow these steps:
 2. Run this command in order to install all dependencies `npm install`. All dependencies are in file `package.json`
 3. Run this command `ng serve` in order to launch front-end. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 4. P.S. There might be some global dependencies which may be required to launch front-end. 
+5. Once front-end is launched, back-end can be run as well.
 
 ## Project description
 The front-end uses **Angular 7+** framework. This framework was chosen because of its project structure simplicity and capability to be scaled smoothly. Basically, 
