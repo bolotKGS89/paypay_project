@@ -33,7 +33,6 @@ export class FeedbackDialogComponent implements OnInit, OnDestroy {
       feedback: [{ value: null, disabled: false }, [Validators.pattern]]
     });
     this.buttonName = this.dialogData.button;
-    // this.name;
   }
 
   public submit() {

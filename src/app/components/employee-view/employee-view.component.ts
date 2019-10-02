@@ -12,16 +12,6 @@ import {ToastrService} from "ngx-toastr";
 })
 export class EmployeeViewComponent implements OnInit, OnDestroy {
 
-  // private static readonly FEEDBACK_LIST:
-  //   Array<{name: string}>
-  //   = [
-  //   {name: 'Jon Jones' },
-  //   {name: 'Jacques Audiard'},
-  //   {name: 'Sergey Ivanov'},
-  //   {name: 'Carlos Saucedo'},
-  //   {name: 'Thomas Wurz'}
-  // ];
-
   public displayedColumns: string[];
   public dataSource;
 
