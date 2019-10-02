@@ -20,6 +20,7 @@ I also used **FlexBox** to dynamically move elements of UI depending screen reso
 To correctly and dynamically validate data I used **ReactiveFormsModule**. For example, it ensures that user enters numeric value in necessary input box. 
 I also added command from **WebPack** to set production environment. So far, there is no need to use these settings. In order to run in production environment,
 type **npm run build-prod**. It is also worth mentioning that I used **ngx-toastr** for better UX. 
+I could have improved overall structure of the code by using Design Patterns by using Template Method for dialog windows particularly
 
 My frontend is divided into two main pages which store data related to employees and their performance.
 

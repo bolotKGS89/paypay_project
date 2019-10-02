@@ -70,7 +70,9 @@ import {ToastrModule} from 'ngx-toastr';
     MatOptionModule,
     MatSelectModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      positionClass: 'top-left'
+    })
   ],
   providers: [],
   entryComponents: [
