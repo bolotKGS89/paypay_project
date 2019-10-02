@@ -4,6 +4,7 @@ import {EmployeeDataDialogComponent} from '../../dialogs/employee-data-dialog/em
 import {HttpService} from '../../services/http.service';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
+import {Employee} from '../../interface/Employee';
 
 @Component({
   selector: 'app-employee-data-list',
@@ -14,10 +15,8 @@ export class EmployeeDataListComponent implements OnInit, OnDestroy {
 
   private employeeSubscription: Subscription;
 
-
   public displayedColumns: string[] = ['name', 'position', 'experience', 'nationality', 'actions'];
   public dataSource;
-
 
   constructor(private toastrService: ToastrService,
               private dialog: MatDialog,
@@ -27,7 +26,7 @@ export class EmployeeDataListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.employeeSubscription = this.httpService.getEmployees().subscribe((data) => {
       this.dataSource = data;
-    });
+    }, (error => this.toastrService.error(error)));
   }
 
   public deleteData(id: number) {
@@ -38,23 +37,19 @@ export class EmployeeDataListComponent implements OnInit, OnDestroy {
     });
   }
 
-  public openDialog(buttonArg: string, id: number = null): void {
-    const openDialog = this.dialog.open(EmployeeDataDialogComponent, {
+  public openDialog(buttonArg: string, employee: Employee = null): void {
+    this.dialog.open(EmployeeDataDialogComponent, {
       height: '50vh',
       width: '30vw',
       data: {
         button: buttonArg,
-        id: id
+        employee: employee
       }
-    });
-
-    openDialog.afterClosed().subscribe((data) => {
-
     });
   }
 
   ngOnDestroy(): void {
-    this.employeeSubscription.unsubscribe();
+    if (this.employeeSubscription) { this.employeeSubscription.unsubscribe() }
   }
 
 }

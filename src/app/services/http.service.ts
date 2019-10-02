@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Employee} from '../interface/Employee';
-import {Performance} from '../interface/Performance'
+import {Performance} from '../interface/Performance';
+import {Feedback} from '../interface/Feedback';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,6 @@ export class HttpService {
   constructor(private httpClient: HttpClient) { }
 
   public getEmployees() {
-    console.log(`${environment.server}${environment.employees}`);
     return this.httpClient.get(`${environment.server}${environment.employees}`);
   }
 
@@ -38,5 +38,13 @@ export class HttpService {
 
   public updatePerformance(data: Performance) {
     return this.httpClient.put(`${environment.server}${environment.performance}`, data);
+  }
+
+  public getFeedback() {
+    return this.httpClient.get(`${environment.server}${environment.feedback}`);
+  }
+
+  public saveFeedback(data: Feedback) {
+    return this.httpClient.post(`${environment.server}${environment.feedback}`, data);
   }
 }

@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { HttpService } from 'src/app/services/http.service';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import {Comment} from "../../enum/Comment";
 
 @Component({
   selector: 'app-employee-data-dialog',
@@ -20,7 +21,7 @@ export class EmployeeDataDialogComponent implements OnInit, OnDestroy {
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any,
               public dialogRef: MatDialogRef<EmployeeDataDialogComponent>,
               private formBuilder: FormBuilder,
-              private httpService: HttpService, 
+              private httpService: HttpService,
               private toastr: ToastrService) {
     this.employeeDialogForm = this.formBuilder.group({
       name: [{ value: null, disabled: false }, [Validators.required]],
@@ -32,19 +33,25 @@ export class EmployeeDataDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buttonName = this.dialogData.button;
+    if (this.dialogData.employee) {
+      this.employeeDialogForm.controls.name.patchValue(this.dialogData.employee.name);
+      this.employeeDialogForm.controls.position.patchValue(this.dialogData.employee.position);
+      this.employeeDialogForm.controls.experience.patchValue(this.dialogData.employee.experience);
+      this.employeeDialogForm.controls.nationality.patchValue(this.dialogData.employee.nationality);
+    }
   }
 
   public sendData(): void {
-    if(this.dialogData.id) {
-      this.employeeDialogForm.value.id = this.dialogData.id;
-      this.httpRequest = this.httpService.updateEmployee(this.employeeDialogForm.value).subscribe((data) => {
+    if (this.dialogData.employee === null) {
+      this.httpRequest = this.httpService.addEmployee(this.employeeDialogForm.value).subscribe((data) => {
         this.toastr.success(`Employee ${data} saved`);
       }, (error) => {
         this.toastr.error(error);
       });
     } else {
-      this.httpRequest = this.httpService.addEmployee(this.employeeDialogForm.value).subscribe((data) => {
-          this.toastr.success(`Employee ${data} saved`);
+      this.employeeDialogForm.value.id = this.dialogData.employee.id;
+      this.httpRequest = this.httpService.updateEmployee(this.employeeDialogForm.value).subscribe((data) => {
+        this.toastr.success(`Employee ${data} saved`);
       }, (error) => {
         this.toastr.error(error);
       });
@@ -52,7 +59,7 @@ export class EmployeeDataDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.httpRequest) this.httpRequest.unsubscribe();
+    if (this.httpRequest) { this.httpRequest.unsubscribe() };
   }
 
 }

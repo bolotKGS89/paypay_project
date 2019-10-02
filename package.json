@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-test": "node node_modules/@angular/cli/bin/ng serve --aot"
+    "build-prod": "node node_modules/@angular/cli/bin/ng serve --prod --aot"
   },
   "private": true,
   "dependencies": {

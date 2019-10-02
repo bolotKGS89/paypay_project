@@ -1,46 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PerformanceReviewDialogComponent} from '../../dialogs/performance-review-dialog/performance-review-dialog.component';
 import {MatDialog} from '@angular/material';
+import {ToastrService} from 'ngx-toastr';
+import {HttpService} from '../../services/http.service';
+import {Subscription} from 'rxjs';
+import {Performance} from '../../interface/Performance';
 
 @Component({
   selector: 'app-performance-review-list',
   templateUrl: './performance-review-list.component.html',
   styleUrls: ['./performance-review-list.component.scss']
 })
-export class PerformanceReviewListComponent implements OnInit {
-  private static readonly REVIEW_LIST:
-    Array<{grade: number, date: string, employeeName: string, comment: string}>
-    = [
-    {grade: 3, date: new Date().toDateString(), employeeName: 'Jon Jones', comment: 'Inexperienced'},
-    {grade: 6, date: new Date().toDateString(), employeeName: 'Jacques Audiard', comment: 'Not Bad!!'},
-    {grade: 7, date: new Date().toDateString(), employeeName: 'Sergey Ivanov', comment: 'Not Bad!!'},
-    {grade: 10, date: new Date().toDateString(), employeeName: 'Carlos Saucedo', comment: 'Well done!!'},
-    {grade: 6, date: new Date().toDateString(), employeeName: 'Thomas Wurz', comment: 'Not Bad!!'}
-  ];
+export class PerformanceReviewListComponent implements OnInit, OnDestroy {
 
-  public displayedColumns: string[];
+
+  public displayedColumns: string[] = ['grade', 'date', 'employee', 'comment', 'actions'];
   public dataSource;
 
+  private performanceSubscription: Subscription;
 
-  constructor(private dialog: MatDialog) { }
+
+  constructor(private toastrService: ToastrService,
+              private dialog: MatDialog,
+              public httpService: HttpService) { }
 
   ngOnInit() {
-    this.displayedColumns = ['grade', 'date', 'employee', 'comment', 'actions'];
-    this.dataSource = PerformanceReviewListComponent.REVIEW_LIST;
+    this.performanceSubscription = this.httpService.getPerformance().subscribe((data) => {
+      this.dataSource = data;
+    }, (error => this.toastrService.error(error)));
   }
 
-  openDialog(buttonArg: string): void {
-    const openDialog = this.dialog.open(PerformanceReviewDialogComponent, {
+  openDialog(buttonArg: string, performance: Performance = null): void {
+    this.dialog.open(PerformanceReviewDialogComponent, {
       height: '50vh',
       width: '30vw',
       data: {
-        button: buttonArg
+        button: buttonArg,
+        performance: performance
       }
     });
+  }
 
-    openDialog.afterClosed().subscribe((data) => {
-
-    });
+  ngOnDestroy(): void {
   }
 
 }
